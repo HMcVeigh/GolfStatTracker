@@ -14,5 +14,13 @@ export function setupDatabase(){
         location TEXT NOT NULL
     )`);
 
+    db.run(`CREATE TABLE IF NOT EXISTS courses(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        club_id INTEGER,
+        course_name TEXT NOT NULL,
+        score_to_par INTEGER NOT NULL,
+        FOREIGN KEY (club_id) REFERENCES clubs (id)
+    )`)
+
     console.log("Database tables created");
 }
