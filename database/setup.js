@@ -18,8 +18,19 @@ export function setupDatabase(){
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         club_id INTEGER,
         course_name TEXT NOT NULL,
-        score_to_par INTEGER NOT NULL,
+        par_score INTEGER NOT NULL,
         FOREIGN KEY (club_id) REFERENCES clubs (id)
+    )`)
+
+    db.run(`CREATE TABLE IF NOT EXISTS rounds(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        club_id INTEGER,
+        course_id INTEGER,
+        player_id INTEGER,
+        score INTEGER NOT NULL, 
+        FOREIGN KEY (club_id) REFERENCES clubs (id),
+        FOREIGN KEY (course_id) REFERENCES courses (id),
+        FOREIGN KEY (player_id) REFERENCES players (id)
     )`)
 
     console.log("Database tables created");
