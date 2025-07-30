@@ -2,6 +2,9 @@
 
 import { exit } from 'node:process';
 import readline from 'node:readline';
+import { setupDatabase } from './database/setup.js';
+
+setupDatabase();
 
 // An interface is a set of method signatures that a class must implement
 // Maybe switch to inquirer later
@@ -17,7 +20,7 @@ function showMenu(){
     console.log("3. Calculate Handicap");
     console.log("4. Exit");
 
-    rl.question('Choose an Option (1-4): ', (answer) => {
+    rl.question('\nChoose an Option (1-4): ', (answer) => {
         switch(answer){
             case '1': 
                 recordRound();
@@ -26,14 +29,31 @@ function showMenu(){
                 viewRound();
                 break;
             case '3':
-                handicap();
+                viewHandicap();
                 break;
             case '4':
                 console.log("Goodbye!")
                 exit();
+            default:
+                console.log("Invalid Option, Try again");
+                showMenu();
         }
     });
 }
 
-console.log("Welcome to Your Golf Tracker!")
+function recordRound(){
+    console.log("\nRecording Round...");
+    showMenu();
+}
+
+function viewRound(){
+    console.log("\nViewing Round...");
+    showMenu();
+}
+
+function viewHandicap(){
+    console.log("\nViewing Handicap...");
+    showMenu();
+}
+
 showMenu();
