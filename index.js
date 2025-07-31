@@ -1,24 +1,19 @@
 #!/usr/bin/env node
 
 import { exit } from 'node:process';
-import readline from 'node:readline';
+import { rl } from './utils/readline.js';
 import { setupDatabase } from './database/setup.js';
+import { adminMenu } from './admin/adminMenu.js'
 
 setupDatabase();
-
-// An interface is a set of method signatures that a class must implement
-// Maybe switch to inquirer later
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
 function showMenu(){
     console.log("\n--- My Golf Tracker ---\n");
     console.log("1. Input New Round");
     console.log("2. View Past Round");
     console.log("3. Calculate Handicap");
-    console.log("4. Exit");
+    console.log("4. Admin Menu");
+    console.log("5. Exit");
 
     rl.question('\nChoose an Option (1-4): ', (answer) => {
         switch(answer){
@@ -32,6 +27,9 @@ function showMenu(){
                 viewHandicap();
                 break;
             case '4':
+                adminMenu(showMenu);
+                break;
+            case '5':
                 console.log("Goodbye!")
                 exit();
             default:

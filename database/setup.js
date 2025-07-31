@@ -32,6 +32,4 @@ export function setupDatabase(){
         FOREIGN KEY (course_id) REFERENCES courses (id),
         FOREIGN KEY (player_id) REFERENCES players (id)
     )`)
-
-    console.log("Database tables created");
 }
