@@ -1,6 +1,8 @@
 import { rl } from '../utils/readline.js';
+import { newClub } from './manageClub.js';
+import { showMenu } from '../index.js';
 
-export function adminMenu(showMainMenu){
+export function adminMenu(){
     console.log("\n---Admin Menu---\n");
     console.log("1. Add New Golf Club\n");
     console.log("2. Back\n")
@@ -11,7 +13,7 @@ export function adminMenu(showMainMenu){
                 newClub();
                 break;
             case '2':
-                showMainMenu();
+                showMenu();
                 break;
             default:
                 console.log("Invalid Option, Try Again");

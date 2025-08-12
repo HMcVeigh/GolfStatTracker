@@ -7,7 +7,7 @@ import { adminMenu } from './admin/adminMenu.js'
 
 setupDatabase();
 
-function showMenu(){
+export function showMenu(){
     console.log("\n--- My Golf Tracker ---\n");
     console.log("1. Input New Round");
     console.log("2. View Past Round");
@@ -27,7 +27,7 @@ function showMenu(){
                 viewHandicap();
                 break;
             case '4':
-                adminMenu(showMenu);
+                adminMenu();
                 break;
             case '5':
                 console.log("Goodbye!")
