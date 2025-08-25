@@ -34,6 +34,34 @@ function getClubName(){
     })
 }
 
-function getCourseName(id){
-    console.log(id);
+function getCourseName(clubId){
+    rl.question("Enter Course Name: ", (courseName)=>{
+        if (!courseName || courseName.trim() === ''){
+            console.log("Please enter a valid course name");
+            return getCourseName(clubId);
+        }
+        getPar(clubId, courseName.trim());
+    })
+}
+
+function getPar(clubId, courseName){
+    rl.question("Enter Par Score: ", (par)=>{
+        if (!par || par.trim() === ''){
+            console.log("Please enter a valid number");
+            return getPar(clubId, courseName);
+        }
+        saveCourse(clubId, courseName, parseInt(par));
+    })
+}
+
+function saveCourse(clubId, courseName, scoreToPar){
+    db.run(`INSERT INTO courses (club_id, course_name, par_score) VALUES (?, ?, ?)`, [clubId, courseName, scoreToPar],
+    function(err){
+        if(err){
+            console.error('Error adding course: ', err.message);
+        } else{
+            console.log(`Successfully added: ${courseName} (ID: ${this.lastID})`);
+        }
+        adminMenu();
+    })
 }
