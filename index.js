@@ -3,7 +3,8 @@
 import { exit } from 'node:process';
 import { rl } from './utils/readline.js';
 import { setupDatabase } from './database/setup.js';
-import { adminMenu } from './admin/adminMenu.js'
+import { adminMenu } from './admin/adminMenu.js';
+import { recordRound } from './rounds/roundManagement.js';
 
 setupDatabase();
 
@@ -37,11 +38,6 @@ export function showMenu(){
                 showMenu();
         }
     });
-}
-
-function recordRound(){
-    console.log("\nRecording Round...");
-    showMenu();
 }
 
 function viewRound(){
