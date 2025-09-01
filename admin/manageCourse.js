@@ -50,12 +50,22 @@ function getPar(clubId, courseName){
             console.log("Please enter a valid number");
             return getPar(clubId, courseName);
         }
-        saveCourse(clubId, courseName, parseInt(par));
+        getSlope(clubId, courseName, parseInt(par));
     })
 }
 
-function saveCourse(clubId, courseName, scoreToPar){
-    db.run(`INSERT INTO courses (club_id, course_name, par_score) VALUES (?, ?, ?)`, [clubId, courseName, scoreToPar],
+function getSlope(clubId, courseName, parScore){
+    rl.question("Enter Slope Rating: ", (slope)=>{
+        if (!slope || slope.trim() === ''){
+            console.log("Please enter a valid number");
+            return getSlope(clubId, courseName, parScore);
+        }
+        saveCourse(clubId, courseName, parScore, parseInt(slope));
+    })
+}
+
+function saveCourse(clubId, courseName, scoreToPar, slopeRating){
+    db.run(`INSERT INTO courses (club_id, course_name, par_score, slope_rating) VALUES (?, ?, ?,?)`, [clubId, courseName, scoreToPar, slopeRating],
     function(err){
         if(err){
             console.error('Error adding course: ', err.message);

@@ -5,9 +5,9 @@ import { newCourse } from './manageCourse.js';
 
 export function adminMenu(){
     console.log("\n---Admin Menu---\n");
-    console.log("1. Add New Golf Club\n");
-    console.log("2. Add New Golf Course\n");
-    console.log("3. Back\n")
+    console.log("1. Add New Golf Club");
+    console.log("2. Add New Golf Course");
+    console.log("3. Back to Main Menu");
 
     rl.question('\nChoose an option (1-...): ', (answer) =>{
         switch(answer){
