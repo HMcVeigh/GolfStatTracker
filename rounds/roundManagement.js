@@ -65,7 +65,7 @@ function getScore(clubID, courseID){
         }
         const numScore = parseInt(score.trim());
         if (!isNaN(numScore)){
-            saveRound(clubID, courseID, numScore);
+            getDate(clubID, courseID, numScore);
         }
         else{
             console.log("Enter a valid number between 50 and 160\n");
@@ -74,10 +74,26 @@ function getScore(clubID, courseID){
     })
 }
 
-function saveRound(clubID, courseID, numScore){
+function getDate(clubID, courseID, numScore){
+    rl.question("Enter date played (dd-mm-yyyy): ", (date)=>{ 
+        if (!date || date.trim() === ''){
+            console.log("Please enter a valid date");
+            return getDate(clubID, courseID, numScore);
+        }
+        // Basic date validation
+        const dateRegex = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d\d$/;
+        if (!dateRegex.test(date.trim())){
+            console.log("Please enter a valid date in format dd-mm-yyyy");
+            return getDate(clubID, courseID, numScore);
+        }
+        saveRound(clubID, courseID, numScore, date.trim());
+    })
+}
+
+function saveRound(clubID, courseID, numScore, date){
     const tempPlayerID = 1;
-    db.run(`INSERT INTO rounds (club_id, course_id, player_id, score) VALUES (?,?,?,?)`,
-        [clubID, courseID, tempPlayerID, numScore], (err)=>{
+    db.run(`INSERT INTO rounds (club_id, course_id, player_id, score, date) VALUES (?,?,?,?,?)`,
+        [clubID, courseID, tempPlayerID, numScore, date], (err)=>{
             if (err){
                 console.error("Error adding round: ", err.message);
             }
