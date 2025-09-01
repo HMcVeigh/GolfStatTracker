@@ -5,6 +5,7 @@ import { rl } from './utils/readline.js';
 import { setupDatabase } from './database/setup.js';
 import { adminMenu } from './admin/adminMenu.js';
 import { recordRound } from './rounds/roundManagement.js';
+import { handicap } from './handicap/handicapCalculator.js';
 
 setupDatabase();
 
@@ -25,7 +26,7 @@ export function showMenu(){
                 viewRound();
                 break;
             case '3':
-                viewHandicap();
+                handicap();
                 break;
             case '4':
                 adminMenu();
@@ -42,11 +43,6 @@ export function showMenu(){
 
 function viewRound(){
     console.log("\nViewing Round...");
-    showMenu();
-}
-
-function viewHandicap(){
-    console.log("\nViewing Handicap...");
     showMenu();
 }
 
